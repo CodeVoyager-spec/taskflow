@@ -4,6 +4,7 @@ import { env } from "./config/env";
 const app = express();
 const port = env.port;
 
+// Middlewares
 app.use(express.json());
 
 app.get("/", (req, res) => {
