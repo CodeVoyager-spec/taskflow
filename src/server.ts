@@ -1,18 +1,16 @@
-import express from "express";
-import { env } from "./config/env";
-import { authRouter } from "./routes/auth.routes";
+import dotenv from "dotenv";
+import app from "./app";
+import { env } from "./config/env"
 
-const app = express();
-const port = env.port;
+dotenv.config();
 
-app.use(express.json());
+const PORT = env.port
 
-app.use("/taskflow/api/v1/auth", authRouter);
+const startServer = () => {
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`)
+  })
+}
 
-app.get("/", (req, res) => {
-  res.send("Taskflow saas API running");
-});
+startServer();
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
